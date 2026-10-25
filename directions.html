@@ -11,41 +11,84 @@
 
 <header>
   <div class="container nav">
-    <div class="brand">
+    <a class="brand" href="index.html">
       <div class="brand-mark">К</div>
       КУРС<span>.</span>
-    </div>
+    </a>
+
     <nav class="menu">
-      <a href="index.html">Главная</a>
       <a href="rooms.html">Номера</a>
       <a href="directions.html">Как добраться</a>
       <a href="rules.html">Правила</a>
       <a href="contacts.html">Контакты</a>
     </nav>
-    <a class="btn small" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+
+    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Меню">
+      <span></span>
+    </button>
   </div>
 </header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-bg" onclick="document.getElementById('drawer').classList.remove('open')"></div>
+
+  <div class="drawer-panel">
+    <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+
+    <a href="index.html">Главная</a>
+    <a href="rooms.html">Номера и цены</a>
+    <a href="directions.html">Как добраться</a>
+    <a href="rules.html">Правила и FAQ</a>
+    <a href="contacts.html">Контакты</a>
+
+    <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+  </div>
+</div>
 
 <main>
 
   <section class="hero">
     <div class="container">
-      <div class="badge">
+      <div class="eyebrow">
         <span class="dot"></span>
         Иркутск • Октябрьский район
       </div>
 
-      <h1>Как добраться</h1>
+      <h1>Как <em>добраться</em></h1>
 
       <p class="lead">
         Хостел «Курс» находится по адресу: Иркутск, Коммунистическая улица, 65.
-        Ниже — основные маршруты из аэропорта, с вокзала и на автомобиле.
+        Ниже — карта и основные маршруты.
       </p>
 
       <div class="hero-actions">
         <a class="btn" href="https://t.me/Irkutsk_hostel_bot">
           Спросить маршрут в Telegram
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #fff;">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Карта</div>
+        <h2>Коммунистическая улица, 65</h2>
+        <p class="sub">
+          Перед приездом напишите в Telegram — подтвердим заселение
+          и подскажем вход.
+        </p>
+      </div>
+
+      <div class="card map-card">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?text=%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%2C%20%D0%9A%D0%BE%D0%BC%D0%BC%D1%83%D0%BD%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2065&z=16"
+          width="100%"
+          height="380"
+          style="border: 0; border-radius: 20px;"
+          loading="lazy"
+          title="Карта: Иркутск, Коммунистическая улица, 65">
+        </iframe>
       </div>
     </div>
   </section>
@@ -63,8 +106,8 @@
           <h3>Из аэропорта</h3>
           <p>
             Можно доехать на автобусе, такси или каршеринге.
-            Время в пути зависит от трафика; обычно это одна из самых
-            удобных точек для транзита.
+            Время зависит от трафика; напишите в Telegram —
+            подскажем текущий удобный вариант.
           </p>
         </div>
 
@@ -74,7 +117,6 @@
           <p>
             От железнодорожного вокзала удобно добираться на автобусе,
             такси или пешком, если едете налегке.
-            Напишите нам — подскажем конкретный вариант.
           </p>
         </div>
 
@@ -93,30 +135,38 @@
   <section style="background: #fff;">
     <div class="container">
       <div class="section-head">
-        <div class="kicker">Адрес</div>
-        <h2>Коммунистическая улица, 65</h2>
+        <div class="kicker">Байкал</div>
+        <h2>Куда поехать дальше</h2>
         <p class="sub">
-          Иркутск, Октябрьский район. Перед приездом напишите в Telegram —
-          подтвердим заселение и подскажем вход.
+          Иркутск — удобная отправная точка для поездок к Байкалу.
         </p>
       </div>
 
-      <div class="grid two">
+      <div class="grid three">
         <div class="card">
-          <div class="icon">📍</div>
-          <h3>Точный адрес</h3>
+          <div class="icon">🏞️</div>
+          <h3>Листвянка</h3>
           <p>
-            Иркутск, ул. Коммунистическая, 65<br>
-            Октябрьский район
+            Ближайшее популярное направление на Байкале: посёлок,
+            набережная, рынок и вид на исток Ангары.
           </p>
         </div>
 
         <div class="card">
-          <div class="icon">🗺️</div>
-          <h3>Навигация</h3>
+          <div class="icon">🏝️</div>
+          <h3>Ольхон</h3>
           <p>
-            Скопируйте адрес в Яндекс Карты, 2ГИС или Google Карты.
-            Если навигатор ведёт не туда — напишите нам.
+            Самый большой остров Байкала.
+            Обычно поездка занимает целый день или больше.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏔️</div>
+          <h3>Хужир</h3>
+          <p>
+            Главный посёлок Ольхона, удобная база для прогулок
+            и поездок по острову.
           </p>
         </div>
       </div>
@@ -127,8 +177,8 @@
     <div class="container">
       <h2>Едете впервые?</h2>
       <p>
-        Напишите, откуда прибываете: аэропорт, вокзал, автовокзал или на машине.
-        Подскажем маршрут и время.
+        Напишите, откуда прибываете: аэропорт, вокзал, автовокзал
+        или на машине. Подскажем маршрут и время.
       </p>
       <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Написать в Telegram</a>
     </div>
@@ -176,9 +226,14 @@
   </div>
 
   <div class="container copyright">
-    © 2026 Хостел «Курс». Название рабочее.
+    © 2026 Хостел «Курс». Тестовый сайт.
   </div>
 </footer>
+
+<div class="mobile-bar">
+  <a class="btn ghost" href="https://t.me/Irkutsk_hostel_bot">Telegram</a>
+  <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+</div>
 
 </body>
 </html>
