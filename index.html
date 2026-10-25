@@ -3,36 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Курс — спокойный хостел в Иркутске | от 790 ₽</title>
-  <meta name="description" content="Хостел «Курс» в Иркутске: чистые комнаты, удобные кровати, Wi-Fi, кухня и парковка. Удобно добраться из аэропорта и с вокзала. От 790 ₽.">
+  <title>Курс — спокойный хостел в Иркутске | от 690 ₽</title>
+  <meta name="description" content="Хостел «Курс» в Иркутске: чистые комнаты, удобные кровати, Wi-Fi, кухня и парковка. От 690 ₽. Удобно из аэропорта и с вокзала.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <div class="container nav">
-    <div class="brand">
+    <a class="brand" href="index.html">
       <div class="brand-mark">К</div>
       КУРС<span>.</span>
-    </div>
+    </a>
+
     <nav class="menu">
-      <a href="index.html">Главная</a>
       <a href="rooms.html">Номера</a>
       <a href="directions.html">Как добраться</a>
       <a href="rules.html">Правила</a>
       <a href="contacts.html">Контакты</a>
     </nav>
-    <a class="btn small" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+
+    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Меню">
+      <span></span>
+    </button>
   </div>
 </header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-bg" onclick="document.getElementById('drawer').classList.remove('open')"></div>
+
+  <div class="drawer-panel">
+    <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+
+    <a href="index.html">Главная</a>
+    <a href="rooms.html">Номера и цены</a>
+    <a href="directions.html">Как добраться</a>
+    <a href="rules.html">Правила и FAQ</a>
+    <a href="contacts.html">Контакты</a>
+
+    <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+  </div>
+</div>
 
 <main>
 
   <section class="hero">
     <div class="container hero-grid">
-
       <div>
-        <div class="badge">
+        <div class="eyebrow">
           <span class="dot"></span>
           Иркутск • Октябрьский район
         </div>
@@ -41,56 +59,67 @@
           Спокойная остановка <em>перед Байкалом</em>
         </h1>
 
-        <p>
-          Чистые комнаты, удобные кровати, Wi-Fi и общая кухня.
-          Удобно добраться из аэропорта и с вокзала — для командировки,
-          работы, транзита и путешествия.
+        <p class="lead">
+          Чистые комнаты, удобные кровати, Wi-Fi, кухня и парковка.
+          Для командировок, работы, транзита и поездок к Байкалу.
         </p>
 
         <div class="hero-actions">
-          <a class="btn" href="https://t.me/Irkutsk_hostel_bot">
-            Проверить даты и забронировать
-          </a>
-          <a class="btn ghost" href="rooms.html">
-            Посмотреть номера
-          </a>
+          <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать в Telegram</a>
+          <a class="btn ghost" href="rooms.html">Посмотреть номера</a>
         </div>
 
-        <div class="hero-facts">
-          <div class="fact">
-            <b>42</b>
-            <span>места</span>
-          </div>
-          <div class="fact">
-            <b>от 790 ₽</b>
-            <span>за ночь</span>
-          </div>
-          <div class="fact">
-            <b>Wi-Fi</b>
-            <span>и общая кухня</span>
-          </div>
-          <div class="fact">
-            <b>Парковка</b>
-            <span>для гостей</span>
-          </div>
+        <div class="facts">
+          <div class="fact"><b>42</b><span>места</span></div>
+          <div class="fact"><b>от 690 ₽</b><span>за ночь</span></div>
+          <div class="fact"><b>Wi-Fi</b><span>и общая кухня</span></div>
+          <div class="fact"><b>Парковка</b><span>для гостей</span></div>
         </div>
       </div>
 
-      <aside class="hero-card">
-        <h3>Что включено</h3>
-        <ul>
-          <li><span class="check">✓</span> Постельное бельё и полотенце</li>
-          <li><span class="check">✓</span> Быстрый Wi-Fi</li>
-          <li><span class="check">✓</span> Общая кухня</li>
-          <li><span class="check">✓</span> Место для вещей</li>
-          <li><span class="check">✓</span> Парковка</li>
-          <li><span class="check">✓</span> Помощь с маршрутом на Байкал</li>
-        </ul>
-        <a class="btn" style="width: 100%; margin-top: 18px;" href="https://t.me/Irkutsk_hostel_bot">
-          Забронировать в Telegram
-        </a>
-      </aside>
+      <div class="booking">
+        <h3>Проверить свободные даты</h3>
+        <p>Заполните данные — откроется Telegram с готовым сообщением.</p>
 
+        <form class="form" onsubmit="return sendBooking(event)">
+          <div class="field">
+            <label>Заезд</label>
+            <input type="date" id="in" required>
+          </div>
+
+          <div class="field">
+            <label>Выезд</label>
+            <input type="date" id="out" required>
+          </div>
+
+          <div class="field">
+            <label>Гостей</label>
+            <select id="guests">
+              <option>1 гость</option>
+              <option>2 гостя</option>
+              <option>3 гостя</option>
+              <option>4 гостя</option>
+              <option>5+ гостей</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Формат</label>
+            <select id="type">
+              <option>Место в 4-местной</option>
+              <option>Место в 2-местной</option>
+              <option>Двухместная комната</option>
+              <option>Подскажите вариант</option>
+            </select>
+          </div>
+
+          <button class="btn full" type="submit">Проверить наличие</button>
+        </form>
+
+        <p class="note">
+          Бронирование и вопросы — через Telegram: @Irkutsk_hostel_bot
+        </p>
+      </div>
     </div>
   </section>
 
@@ -100,8 +129,8 @@
         <div class="kicker">Почему Курс</div>
         <h2>Спокойно. Чисто. Понятно.</h2>
         <p class="sub">
-          Мы не обещаем люкс. Мы создаём место, где можно нормально
-          выспаться, привести себя в порядок и продолжить дорогу.
+          Мы не обещаем люкс. Мы создаём место, где можно выспаться,
+          привести себя в порядок и продолжить дорогу.
         </p>
       </div>
 
@@ -136,31 +165,118 @@
   <section style="background: #fff;">
     <div class="container">
       <div class="section-head">
-        <div class="kicker">Для кого</div>
-        <h2>Кому у нас будет удобно</h2>
+        <div class="kicker">Номера</div>
+        <h2>Выберите свой формат</h2>
         <p class="sub">
-          «Курс» подходит тем, кому нужно не шумное место,
-          а нормальный отдых и понятные условия.
+          Фото временные — для демонстрации карусели.
+          Позже заменим на реальные фотографии хостела.
         </p>
       </div>
 
       <div class="grid three">
-        <div class="card">
-          <div class="icon">💼</div>
-          <h3>Командировочным</h3>
-          <p>Спокойная атмосфера, Wi-Fi, удобный выезд утром и близость транспорта.</p>
+
+        <div class="card room">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
+            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
+          </div>
+
+          <div class="room-body">
+            <div class="room-top">
+              <h3>Место в 4-местной комнате</h3>
+              <div class="price">690 ₽<small>за ночь</small></div>
+            </div>
+
+            <ul>
+              <li><span class="check">✓</span> Двухъярусная кровать</li>
+              <li><span class="check">✓</span> Розетка и свет</li>
+              <li><span class="check">✓</span> Бельё и полотенце</li>
+            </ul>
+
+            <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Проверить наличие</a>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="icon">🚕</div>
-          <h3>Водителям и в дороге</h3>
-          <p>Парковка, понятный заезд и возможность остановиться на 1–3 ночи.</p>
+        <div class="card room">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1522771731526-281b37dd1902?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
+            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
+          </div>
+
+          <div class="room-body">
+            <div class="room-top">
+              <h3>Место в 2-местной комнате</h3>
+              <div class="price">750 ₽<small>за ночь</small></div>
+            </div>
+
+            <ul>
+              <li><span class="check">✓</span> Две односпальные кровати</li>
+              <li><span class="check">✓</span> Спокойный формат</li>
+              <li><span class="check">✓</span> Шкаф, стол и тумбочки</li>
+            </ul>
+
+            <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Проверить наличие</a>
+          </div>
         </div>
 
-        <div class="card">
-          <div class="icon">🏔️</div>
-          <h3>Путешественникам</h3>
-          <p>Удобная точка перед поездкой в Листвянку, на Ольхон или в Хужир.</p>
+        <div class="card room">
+          <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
+            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
+          </div>
+
+          <div class="room-body">
+            <div class="room-top">
+              <h3>Двухместная комната</h3>
+              <div class="price">1 500 ₽<small>за ночь</small></div>
+            </div>
+
+            <ul>
+              <li><span class="check">✓</span> Двуспальная кровать</li>
+              <li><span class="check">✓</span> Для двоих</li>
+              <li><span class="check">✓</span> Бельё и полотенце</li>
+            </ul>
+
+            <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Проверить наличие</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align: center; margin-top: 26px;">
+        <a class="btn ghost" href="rooms.html">Все номера и цены</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Отзывы</div>
+        <h2>Что говорят гости</h2>
+        <p class="sub">
+          Здесь пока примеры отзывов для теста.
+          Позже добавим реальные отзывы гостей.
+        </p>
+      </div>
+
+      <div class="grid three">
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>«Приехала в командировку, всё чисто, тихо, удобно добираться. Отличный вариант на несколько ночей.»</p>
+          <div class="review-author">Анна • командировка</div>
+        </div>
+
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>«Останавливался перед поездкой на Байкал. Понравились кухня, Wi-Fi и спокойная атмосфера.»</p>
+          <div class="review-author">Дмитрий • путешествие</div>
+        </div>
+
+        <div class="review">
+          <div class="stars">★★★★☆</div>
+          <p>«Удобное расположение, парковка рядом, быстро ответили в Telegram и помогли с маршрутом.»</p>
+          <div class="review-author">Игорь • на автомобиле</div>
         </div>
       </div>
     </div>
@@ -169,107 +285,39 @@
   <section class="dark">
     <div class="container">
       <div class="section-head">
-        <div class="kicker">Честно о нас</div>
-        <h2>Не люкс. Но чисто, спокойно и по-человечески.</h2>
+        <div class="kicker">Расположение</div>
+        <h2>Удобно начать путь к Байкалу</h2>
         <p class="sub">
-          «Курс» — новый хостел для тех, кто ценит порядок,
-          нормальный сон и уважительное отношение.
+          Хостел находится в Октябрьском районе Иркутска.
+          Отсюда удобно добираться в центр, в аэропорт и в сторону Байкала.
         </p>
       </div>
 
-      <div class="grid three">
-        <div class="card">
-          <div class="icon">✓</div>
-          <h3>Без лишних сюрпризов</h3>
-          <p>Понятные правила, честная цена и заранее известные условия проживания.</p>
+      <div class="grid two">
+        <div class="card map-card">
+          <div class="map-placeholder">
+            Здесь будет интерактивная карта<br>
+            Яндекс Карты или 2ГИС
+          </div>
         </div>
 
         <div class="card">
-          <div class="icon">✓</div>
-          <h3>Тишина после 23:00</h3>
-          <p>Мы не пати-хостел. У нас останавливаются те, кому важно выспаться.</p>
-        </div>
+          <div class="icon">📍</div>
+          <h3>Адрес</h3>
+          <p>
+            Иркутск, Коммунистическая улица, 65<br>
+            Октябрьский район
+          </p>
 
-        <div class="card">
-          <div class="icon">✓</div>
-          <h3>Помощь с Байкалом</h3>
-          <p>Подскажем маршруты в Листвянку, на Ольхон и в Хужир.</p>
+          <a class="btn ghost" style="margin-top: 16px; color: #fff; border-color: rgba(255,255,255,.4);" href="directions.html">
+            Как добраться
+          </a>
         </div>
       </div>
     </div>
   </section>
 
   <section>
-    <div class="container">
-      <div class="section-head">
-        <div class="kicker">Номера</div>
-        <h2>Выберите свой формат</h2>
-        <p class="sub">
-          42 места: общие комнаты, двухместные номера и отдельные комнаты.
-        </p>
-      </div>
-
-      <div class="grid three">
-
-        <div class="card room">
-          <div class="visual">Фото появится позже</div>
-          <div class="room-body">
-            <div class="room-top">
-              <h3>Место в 4-местной комнате</h3>
-              <div class="price">790 ₽<small>за ночь</small></div>
-            </div>
-            <ul>
-              <li><span class="check">✓</span> Двухъярусная кровать</li>
-              <li><span class="check">✓</span> Розетка и свет</li>
-              <li><span class="check">✓</span> Бельё и полотенце</li>
-            </ul>
-            <a class="btn" style="width: 100%;" href="https://t.me/Irkutsk_hostel_bot">
-              Проверить наличие
-            </a>
-          </div>
-        </div>
-
-        <div class="card room">
-          <div class="visual">Фото появится позже</div>
-          <div class="room-body">
-            <div class="room-top">
-              <h3>Место в 2-местной комнате</h3>
-              <div class="price">По запросу<small>за ночь</small></div>
-            </div>
-            <ul>
-              <li><span class="check">✓</span> Две односпальные кровати</li>
-              <li><span class="check">✓</span> Спокойный формат</li>
-              <li><span class="check">✓</span> Шкаф, стол и тумбочки</li>
-            </ul>
-            <a class="btn" style="width: 100%;" href="https://t.me/Irkutsk_hostel_bot">
-              Уточнить цену
-            </a>
-          </div>
-        </div>
-
-        <div class="card room">
-          <div class="visual">Фото появится позже</div>
-          <div class="room-body">
-            <div class="room-top">
-              <h3>Двухместная комната</h3>
-              <div class="price">По запросу<small>за ночь</small></div>
-            </div>
-            <ul>
-              <li><span class="check">✓</span> Двуспальная кровать</li>
-              <li><span class="check">✓</span> Для двоих</li>
-              <li><span class="check">✓</span> Бельё и полотенце</li>
-            </ul>
-            <a class="btn" style="width: 100%;" href="https://t.me/Irkutsk_hostel_bot">
-              Уточнить цену
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section style="background: #fff;">
     <div class="container">
       <div class="section-head">
         <div class="kicker">Вопросы</div>
@@ -279,12 +327,12 @@
       <div class="faq">
         <details open>
           <summary>Во сколько заселение?</summary>
-          <p>Заселение с [время]. Ранний заезд возможен по наличию мест — напишите в Telegram.</p>
+          <p>Заселение с 14:00. Ранний заезд возможен по наличию мест — напишите в Telegram.</p>
         </details>
 
         <details>
-          <summary>Можно ли приехать ночью?</summary>
-          <p>Напишите заранее в Telegram — подскажем порядок заселения.</p>
+          <summary>Во сколько выезд?</summary>
+          <p>Выезд до 12:00. Поздний выезд — по договорённости.</p>
         </details>
 
         <details>
@@ -296,11 +344,6 @@
           <summary>Можно ли с животными?</summary>
           <p>К сожалению, животных мы не размещаем.</p>
         </details>
-
-        <details>
-          <summary>Как добраться до Байкала?</summary>
-          <p>Подскажем маршруты до Листвянки, Ольхона и Хужира.</p>
-        </details>
       </div>
     </div>
   </section>
@@ -309,11 +352,7 @@
     <div class="container">
       <h2>Планируете поездку в Иркутск?</h2>
       <p>Напишите в Telegram — подскажем свободные даты, тарифы и как добраться.</p>
-
-      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-        <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Написать в Telegram</a>
-        <a class="btn ghost" href="rooms.html">Посмотреть номера</a>
-      </div>
+      <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Написать в Telegram</a>
     </div>
   </section>
 
@@ -359,9 +398,36 @@
   </div>
 
   <div class="container copyright">
-    © 2026 Хостел «Курс». Название рабочее.
+    © 2026 Хостел «Курс». Тестовый сайт.
   </div>
 </footer>
+
+<div class="mobile-bar">
+  <a class="btn ghost" href="https://t.me/Irkutsk_hostel_bot">Telegram</a>
+  <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+</div>
+
+<script>
+function sendBooking(e) {
+  e.preventDefault();
+
+  const checkIn = document.getElementById('in').value;
+  const checkOut = document.getElementById('out').value;
+  const guests = document.getElementById('guests').value;
+  const roomType = document.getElementById('type').value;
+
+  const text = encodeURIComponent(
+    'Здравствуйте! Хочу проверить наличие:\n' +
+    'Заезд: ' + checkIn + '\n' +
+    'Выезд: ' + checkOut + '\n' +
+    'Гостей: ' + guests + '\n' +
+    'Формат: ' + roomType
+  );
+
+  window.open('https://t.me/Irkutsk_hostel_bot?text=' + text, '_blank');
+  return false;
+}
+</script>
 
 </body>
 </html>
