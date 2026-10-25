@@ -11,26 +11,45 @@
 
 <header>
   <div class="container nav">
-    <div class="brand">
+    <a class="brand" href="index.html">
       <div class="brand-mark">К</div>
       КУРС<span>.</span>
-    </div>
+    </a>
+
     <nav class="menu">
-      <a href="index.html">Главная</a>
       <a href="rooms.html">Номера</a>
       <a href="directions.html">Как добраться</a>
       <a href="rules.html">Правила</a>
       <a href="contacts.html">Контакты</a>
     </nav>
-    <a class="btn small" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+
+    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Меню">
+      <span></span>
+    </button>
   </div>
 </header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-bg" onclick="document.getElementById('drawer').classList.remove('open')"></div>
+
+  <div class="drawer-panel">
+    <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+
+    <a href="index.html">Главная</a>
+    <a href="rooms.html">Номера и цены</a>
+    <a href="directions.html">Как добраться</a>
+    <a href="rules.html">Правила и FAQ</a>
+    <a href="contacts.html">Контакты</a>
+
+    <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+  </div>
+</div>
 
 <main>
 
   <section class="hero">
     <div class="container">
-      <div class="badge">
+      <div class="eyebrow">
         <span class="dot"></span>
         Хостел «Курс»
       </div>
@@ -97,12 +116,13 @@
       <div class="section-head">
         <div class="kicker">Перед приездом</div>
         <h2>Что написать в Telegram</h2>
+        <p class="sub">Чтобы мы быстро подобрали вариант, напишите коротко:</p>
       </div>
 
       <div class="grid two">
         <div class="card">
           <div class="icon">📝</div>
-          <h3>Коротко и удобно</h3>
+          <h3>Основное</h3>
           <p>
             Даты заезда и выезда, количество гостей,
             удобный формат комнаты и время прибытия.
@@ -117,6 +137,26 @@
             подскажем про парковку и заезд.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Карта</div>
+        <h2>Мы на карте</h2>
+      </div>
+
+      <div class="card map-card">
+        <iframe
+          src="https://yandex.ru/map-widget/v1/?text=%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%2C%20%D0%9A%D0%BE%D0%BC%D0%BC%D1%83%D0%BD%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2065&z=16"
+          width="100%"
+          height="380"
+          style="border: 0; border-radius: 20px;"
+          loading="lazy"
+          title="Карта: Иркутск, Коммунистическая улица, 65">
+        </iframe>
       </div>
     </div>
   </section>
@@ -174,9 +214,14 @@
   </div>
 
   <div class="container copyright">
-    © 2026 Хостел «Курс». Название рабочее.
+    © 2026 Хостел «Курс». Тестовый сайт.
   </div>
 </footer>
+
+<div class="mobile-bar">
+  <a class="btn ghost" href="https://t.me/Irkutsk_hostel_bot">Telegram</a>
+  <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+</div>
 
 </body>
 </html>
