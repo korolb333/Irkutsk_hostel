@@ -16,8 +16,8 @@
   };
 
   /*
-   * Каталог:
-   * добавляем выбранную комнату в ссылку на главную.
+   * Каталог: передаём выбранную комнату
+   * в адрес страницы с формой.
    */
   Object.entries(roomCards).forEach(([cardId, roomName]) => {
     const card = document.getElementById(cardId);
@@ -28,7 +28,10 @@
 
     if (!link) return;
 
-    const destination = new URL('index.html', window.location.href);
+    const destination = new URL(
+      'index.html',
+      window.location.href
+    );
 
     destination.searchParams.set('room', roomName);
     destination.hash = 'booking';
@@ -37,8 +40,7 @@
   });
 
   /*
-   * Главная:
-   * подставляем комнату из адреса в форму.
+   * Следующая часть нужна только на главной.
    */
   const roomSelect = document.getElementById('room-type');
 
@@ -59,7 +61,7 @@
         selectedRoom = savedRoom;
       }
     } catch (error) {
-      // Форма продолжает работать без сохранения выбора.
+      // Выбор продолжает работать без хранилища.
     }
   }
 
@@ -68,20 +70,17 @@
   }
 
   function rememberSelection() {
-    if (!allowedRooms.includes(roomSelect.value)) {
-      try {
-        sessionStorage.removeItem(storageKey);
-      } catch (error) {
-        // Сохранение не обязательно для работы формы.
-      }
-
-      return;
-    }
-
     try {
-      sessionStorage.setItem(storageKey, roomSelect.value);
+      if (allowedRooms.includes(roomSelect.value)) {
+        sessionStorage.setItem(
+          storageKey,
+          roomSelect.value
+        );
+      } else {
+        sessionStorage.removeItem(storageKey);
+      }
     } catch (error) {
-      // Выбор остаётся доступен в самой форме.
+      // Сохранение не обязательно для работы формы.
     }
   }
 
@@ -91,18 +90,10 @@
 
   roomSelect.addEventListener('change', rememberSelection);
 
-  /*
-   * Кнопки комнат на самой главной
-   * также запоминают выбранный формат.
-   */
   document.querySelectorAll('.choose-room').forEach(button => {
     button.addEventListener('click', rememberSelection);
   });
 
-  /*
-   * После подстановки убираем служебный параметр
-   * из адресной строки, сохраняя переход к форме.
-   */
   if (requestedRoom !== null) {
     pageUrl.searchParams.delete('room');
 
@@ -113,7 +104,71 @@
         pageUrl.pathname + pageUrl.search + pageUrl.hash
       );
     } catch (error) {
-      // Если адрес изменить нельзя, выбор всё равно работает.
+      // Подстановка комнаты уже выполнена.
     }
   }
+
+  /*
+   * Telegram: добавляем готовый текст в ссылку.
+   * Кнопку копирования оставляем запасным способом.
+   */
+  const form = document.getElementById('booking-form');
+  const messageBox = document.getElementById('message-box');
+  const messageField = document.getElementById(
+    'booking-message'
+  );
+
+  if (!form || !messageBox || !messageField) return;
+
+  const telegramButton = messageBox.querySelector(
+    'a[href^="https://t.me/Irkutsk_hostel_bot"]'
+  );
+
+  if (!telegramButton) return;
+
+  function updateTelegramLink() {
+    const message = messageField.value.trim();
+
+    if (!message) {
+      telegramButton.href =
+        'https://t.me/Irkutsk_hostel_bot';
+
+      return;
+    }
+
+    const telegramUrl = new URL(
+      'https://t.me/Irkutsk_hostel_bot'
+    );
+
+    telegramUrl.searchParams.set('text', message);
+
+    telegramButton.href = telegramUrl.href;
+    telegramButton.target = '_blank';
+    telegramButton.rel = 'noopener noreferrer';
+  }
+
+  /*
+   * Основной скрипт главной уже формирует сообщение.
+   * После его выполнения обновляем ссылку.
+   */
+  form.addEventListener('submit', () => {
+    queueMicrotask(updateTelegramLink);
+  });
+
+  /*
+   * Дополнительно обновляем ссылку перед открытием.
+   */
+  telegramButton.addEventListener(
+    'click',
+    updateTelegramLink
+  );
+
+  const help = document.createElement('p');
+
+  help.className = 'note';
+  help.textContent =
+    'Если Telegram открыл пустой чат, вернитесь сюда, ' +
+    'нажмите «Скопировать» и вставьте сообщение вручную.';
+
+  messageBox.appendChild(help);
 })();
