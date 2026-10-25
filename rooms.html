@@ -3,45 +3,219 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Номера и цены — хостел «Курс» Иркутск</title>
-  <meta name="description" content="Номера и цены хостела «Курс» в Иркутске: место в 4-местной комнате от 690 ₽, место в 2-местной от 750 ₽, двухместная комната от 1 500 ₽.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Номера и цены — учебный сайт «Курс»</title>
+  <meta
+    name="description"
+    content="Учебный каталог комнат хостела «Курс». Демонстрационные фотографии, цены и варианты размещения.">
+
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .test-banner {
+      padding: 9px 20px;
+      background: #e7f1ec;
+      color: #0f3d33;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .menu a[aria-current="page"] {
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+    }
+
+    .room,
+    .grid > * {
+      min-width: 0;
+    }
+
+    .gallery-wrap {
+      position: relative;
+      min-width: 0;
+    }
+
+    .gallery {
+      gap: 0;
+    }
+
+    .gallery img {
+      min-width: 100%;
+      aspect-ratio: 4 / 3;
+      background: #e4e0d6;
+    }
+
+    .gallery-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      color: #0f3d33;
+      font-size: 25px;
+      cursor: pointer;
+      box-shadow: 0 3px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-arrow.prev {
+      left: 10px;
+    }
+
+    .gallery-arrow.next {
+      right: 10px;
+    }
+
+    .photo-note {
+      padding: 8px 14px;
+      background: #eef3ef;
+      color: #47564e;
+      font-size: 12px;
+    }
+
+    .room-top {
+      flex-wrap: wrap;
+    }
+
+    .room-top h3 {
+      flex: 1 1 170px;
+    }
+
+    .room-description {
+      margin: 14px 0 0;
+    }
+
+    .room .room-note {
+      margin: 0 0 18px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .drawer-panel {
+      overflow-y: auto;
+    }
+
+    .drawer-panel .btn {
+      color: white;
+      background: var(--green);
+    }
+
+    .drawer-panel .btn:hover {
+      color: white;
+      background: var(--green-dark);
+    }
+
+    .drawer-panel a[aria-current="page"] {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .breadcrumbs {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumbs a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .mobile-bar {
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    body {
+      padding-bottom: calc(84px + env(safe-area-inset-bottom));
+    }
+
+    :focus-visible {
+      outline: 3px solid #d9a13b;
+      outline-offset: 4px;
+    }
+
+    @media (min-width: 860px) {
+      .mobile-bar {
+        display: none;
+      }
+
+      body {
+        padding-bottom: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
+<div class="test-banner">
+  Учебный сайт. Хостел ещё не открыт.
+  Фотографии, цены и условия — демонстрационные.
+</div>
 
 <header>
   <div class="container nav">
-    <a class="brand" href="index.html">
-      <div class="brand-mark">К</div>
+    <a class="brand" href="index.html" aria-label="Курс — главная">
+      <span class="brand-mark" style="color: white;">К</span>
       КУРС<span>.</span>
     </a>
 
-    <nav class="menu">
-      <a href="rooms.html">Номера</a>
+    <nav class="menu" aria-label="Основная навигация">
+      <a href="index.html">Главная</a>
+      <a href="rooms.html" aria-current="page">Номера</a>
       <a href="directions.html">Как добраться</a>
       <a href="rules.html">Правила</a>
       <a href="contacts.html">Контакты</a>
     </nav>
 
-    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Меню">
+    <button
+      class="burger"
+      id="open-menu"
+      type="button"
+      aria-label="Открыть меню"
+      aria-controls="mobile-menu"
+      aria-expanded="false">
       <span></span>
     </button>
   </div>
 </header>
 
-<div class="drawer" id="drawer">
-  <div class="drawer-bg" onclick="document.getElementById('drawer').classList.remove('open')"></div>
+<div class="drawer" id="mobile-menu" hidden>
+  <div class="drawer-bg" id="menu-backdrop"></div>
 
-  <div class="drawer-panel">
-    <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+  <div
+    class="drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Навигация по сайту">
+
+    <button
+      class="drawer-close"
+      id="close-menu"
+      type="button"
+      aria-label="Закрыть меню">
+      ×
+    </button>
 
     <a href="index.html">Главная</a>
-    <a href="rooms.html">Номера и цены</a>
+    <a href="rooms.html" aria-current="page">Номера и цены</a>
     <a href="directions.html">Как добраться</a>
     <a href="rules.html">Правила и FAQ</a>
     <a href="contacts.html">Контакты</a>
 
-    <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+    <a class="btn" href="index.html#booking">
+      Тестовая заявка
+    </a>
   </div>
 </div>
 
@@ -49,22 +223,346 @@
 
   <section class="hero">
     <div class="container">
+
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a href="index.html">Главная</a>
+        <span aria-hidden="true"> / </span>
+        <span>Номера и цены</span>
+      </nav>
+
       <div class="eyebrow">
         <span class="dot"></span>
-        Хостел «Курс»
+        Каталог учебного проекта
       </div>
 
-      <h1>Номера <em>и цены</em></h1>
+      <h1>Ваш формат <em>отдыха</em></h1>
 
       <p class="lead">
-        42 места: общие комнаты, двухместные номера и отдельные комнаты.
-        Чисто, спокойно и по понятной цене.
+        Место в общей комнате или отдельная комната для двоих.
+        Сравните варианты и попробуйте оформить тестовую заявку.
       </p>
 
       <div class="hero-actions">
-        <a class="btn" href="https://t.me/Irkutsk_hostel_bot">
-          Проверить даты в Telegram
+        <a class="btn" href="#room-list">
+          Сравнить варианты
         </a>
+
+        <a class="btn ghost" href="index.html#booking">
+          Перейти к форме
+        </a>
+      </div>
+
+      <p class="note">
+        Цены ниже используются для обучения.
+        Реальное бронирование и оплата недоступны.
+      </p>
+    </div>
+  </section>
+
+  <section id="room-list">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Три варианта</div>
+        <h2>Комнаты и места</h2>
+
+        <p class="sub">
+          Листайте фото пальцем или стрелками.
+          Изображения показывают примеры интерьеров,
+          а не будущий хостел.
+        </p>
+      </div>
+
+      <div class="grid three">
+
+        <article class="card room" id="shared-four">
+          <div class="gallery-wrap">
+            <div
+              class="gallery"
+              aria-label="Тестовые фотографии общей комнаты">
+
+              <img
+                src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+                alt="Пример интерьера хостела — тестовое фото 1"
+                loading="lazy"
+                width="900"
+                height="675">
+
+              <img
+                src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+                alt="Пример интерьера комнаты — тестовое фото 2"
+                loading="lazy"
+                width="900"
+                height="675">
+            </div>
+
+            <button
+              class="gallery-arrow prev"
+              type="button"
+              data-direction="-1"
+              aria-label="Предыдущее фото общей комнаты">
+              ‹
+            </button>
+
+            <button
+              class="gallery-arrow next"
+              type="button"
+              data-direction="1"
+              aria-label="Следующее фото общей комнаты">
+              ›
+            </button>
+          </div>
+
+          <div class="photo-note">
+            Тестовые фото · не наш хостел
+          </div>
+
+          <div class="room-body">
+            <div class="room-top">
+              <h3>Место в 4-местной комнате</h3>
+
+              <div class="price">
+                690 ₽
+                <small>за 1 гостя / ночь</small>
+              </div>
+            </div>
+
+            <p class="room-description">
+              Демонстрационный вариант для тех,
+              кому достаточно одного спального места.
+            </p>
+
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                Общая комната на четыре места
+              </li>
+              <li>
+                <span class="check">✓</span>
+                Двухъярусные кровати по концепции
+              </li>
+              <li>
+                <span class="check">✓</span>
+                Цена указана за одно место
+              </li>
+            </ul>
+
+            <p class="room-note">
+              Оснащение и условия пока не утверждены.
+            </p>
+
+            <a class="btn" href="index.html#booking">
+              Выбрать формат
+            </a>
+          </div>
+        </article>
+
+        <article class="card room" id="shared-two">
+          <div class="gallery-wrap">
+            <div
+              class="gallery"
+              aria-label="Тестовые фотографии комнаты на двоих">
+
+              <img
+                src="https://images.unsplash.com/photo-1522771731526-281b37dd1902?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+                alt="Пример интерьера комнаты — тестовое фото 1"
+                loading="lazy"
+                width="900"
+                height="675">
+
+              <img
+                src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+                alt="Пример интерьера комнаты — тестовое фото 2"
+                loading="lazy"
+                width="900"
+                height="675">
+            </div>
+
+            <button
+              class="gallery-arrow prev"
+              type="button"
+              data-direction="-1"
+              aria-label="Предыдущее фото комнаты на двоих">
+              ‹
+            </button>
+
+            <button
+              class="gallery-arrow next"
+              type="button"
+              data-direction="1"
+              aria-label="Следующее фото комнаты на двоих">
+              ›
+            </button>
+          </div>
+
+          <div class="photo-note">
+            Тестовые фото · не наш хостел
+          </div>
+
+          <div class="room-body">
+            <div class="room-top">
+              <h3>Место в 2-местной комнате</h3>
+
+              <div class="price">
+                750 ₽
+                <small>за 1 гостя / ночь</small>
+              </div>
+            </div>
+
+            <p class="room-description">
+              Демонстрационный вариант комнаты
+              с двумя отдельными спальными местами.
+            </p>
+
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                Два места в комнате
+              </li>
+              <li>
+                <span class="check">✓</span>
+                Раздельные кровати по концепции
+              </li>
+              <li>
+                <span class="check">✓</span>
+                Цена за место, не за всю комнату
+              </li>
+            </ul>
+
+            <p class="room-note">
+              Оснащение и условия пока не утверждены.
+            </p>
+
+            <a class="btn" href="index.html#booking">
+              Выбрать формат
+            </a>
+          </div>
+        </article>
+
+        <article class="card room" id="private-two">
+          <div class="gallery-wrap">
+            <div
+              class="gallery"
+              aria-label="Тестовые фотографии отдельной комнаты">
+
+              <img
+                src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+                alt="Пример отдельного номера — тестовое фото 1"
+                loading="lazy"
+                width="900"
+                height="675">
+
+              <img
+                src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&amp;fit=crop&amp;w=900&amp;q=75"
+                alt="Пример отдельного номера — тестовое фото 2"
+                loading="lazy"
+                width="900"
+                height="675">
+            </div>
+
+            <button
+              class="gallery-arrow prev"
+              type="button"
+              data-direction="-1"
+              aria-label="Предыдущее фото отдельной комнаты">
+              ‹
+            </button>
+
+            <button
+              class="gallery-arrow next"
+              type="button"
+              data-direction="1"
+              aria-label="Следующее фото отдельной комнаты">
+              ›
+            </button>
+          </div>
+
+          <div class="photo-note">
+            Тестовые фото · не наш хостел
+          </div>
+
+          <div class="room-body">
+            <div class="room-top">
+              <h3>Двухместная комната</h3>
+
+              <div class="price">
+                1 500 ₽
+                <small>за комнату / ночь</small>
+              </div>
+            </div>
+
+            <p class="room-description">
+              Демонстрационный вариант отдельной
+              комнаты для одного или двух гостей.
+            </p>
+
+            <ul>
+              <li>
+                <span class="check">✓</span>
+                Отдельная комната
+              </li>
+              <li>
+                <span class="check">✓</span>
+                Размещение до двух гостей
+              </li>
+              <li>
+                <span class="check">✓</span>
+                Цена за всю комнату
+              </li>
+            </ul>
+
+            <p class="room-note">
+              Оснащение и условия пока не утверждены.
+            </p>
+
+            <a class="btn" href="index.html#booking">
+              Выбрать формат
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section style="background: white;">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Перед открытием</div>
+        <h2>Что уточним для каждой комнаты</h2>
+
+        <p class="sub">
+          Сейчас проверяем структуру каталога.
+          Перед запуском заполним карточки подтверждёнными данными.
+        </p>
+      </div>
+
+      <div class="grid three">
+        <div class="card">
+          <div class="icon" aria-hidden="true">🛏️</div>
+          <h3>Кровать и оснащение</h3>
+          <p>
+            Размер спального места, розетки,
+            светильник, хранение вещей и рабочее место.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">🚿</div>
+          <h3>Общие удобства</h3>
+          <p>
+            Расположение душевых и санузлов,
+            доступ к кухне, бельё и полотенца.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">📝</div>
+          <h3>Цена и условия</h3>
+          <p>
+            Что входит в тариф, порядок оплаты,
+            время заезда и условия отмены.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -72,139 +570,59 @@
   <section>
     <div class="container">
       <div class="section-head">
-        <div class="kicker">Выберите формат</div>
-        <h2>Комнаты и места</h2>
-        <p class="sub">
-          Фото временные — для демонстрации.
-          Позже заменим на реальные фотографии хостела.
-        </p>
+        <div class="kicker">Вопросы</div>
+        <h2>О ценах и фотографиях</h2>
       </div>
 
-      <div class="grid three">
+      <div class="faq">
+        <details open>
+          <summary>Почему у двух вариантов цена за место?</summary>
+          <p>
+            В общей комнате карточка показывает стоимость
+            одного спального места. У отдельной двухместной
+            комнаты цена указана за всю комнату.
+          </p>
+        </details>
 
-        <div class="card room">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-            <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-          </div>
+        <details>
+          <summary>Это окончательные цены?</summary>
+          <p>
+            Нет. Все суммы на этой странице демонстрационные.
+            Они нужны для обучения и проверки дизайна.
+          </p>
+        </details>
 
-          <div class="room-body">
-            <div class="room-top">
-              <h3>Место в 4-местной комнате</h3>
-              <div class="price">690 ₽<small>за ночь</small></div>
-            </div>
+        <details>
+          <summary>Фотографии соответствуют будущим комнатам?</summary>
+          <p>
+            Нет. Это временные примеры интерьеров.
+            Перед запуском заменим их собственными фотографиями.
+          </p>
+        </details>
 
-            <ul>
-              <li><span class="check">✓</span> Двухъярусная кровать</li>
-              <li><span class="check">✓</span> Розетка и свет</li>
-              <li><span class="check">✓</span> Место для вещей</li>
-              <li><span class="check">✓</span> Бельё и полотенце</li>
-              <li><span class="check">✓</span> Общий санузел</li>
-            </ul>
-
-            <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Проверить наличие</a>
-          </div>
-        </div>
-
-        <div class="card room">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1522771731526-281b37dd1902?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-            <img src="https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-          </div>
-
-          <div class="room-body">
-            <div class="room-top">
-              <h3>Место в 2-местной комнате</h3>
-              <div class="price">750 ₽<small>за ночь</small></div>
-            </div>
-
-            <ul>
-              <li><span class="check">✓</span> Две односпальные кровати</li>
-              <li><span class="check">✓</span> Спокойный формат</li>
-              <li><span class="check">✓</span> Шкаф, стол, стулья, тумбочки</li>
-              <li><span class="check">✓</span> Бельё и полотенце</li>
-              <li><span class="check">✓</span> Общий санузел</li>
-            </ul>
-
-            <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Проверить наличие</a>
-          </div>
-        </div>
-
-        <div class="card room">
-          <div class="gallery">
-            <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-            <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-            <img src="https://images.unsplash.com/photo-1595576508898-0ad5c879a061?auto=format&fit=crop&w=900&q=70" alt="Тестовое фото комнаты">
-          </div>
-
-          <div class="room-body">
-            <div class="room-top">
-              <h3>Двухместная комната</h3>
-              <div class="price">1 500 ₽<small>за ночь</small></div>
-            </div>
-
-            <ul>
-              <li><span class="check">✓</span> Двуспальная кровать</li>
-              <li><span class="check">✓</span> Для двоих</li>
-              <li><span class="check">✓</span> Шкаф, стол, стулья, тумбочки</li>
-              <li><span class="check">✓</span> Бельё и полотенце</li>
-              <li><span class="check">✓</span> Общий санузел</li>
-            </ul>
-
-            <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Проверить наличие</a>
-          </div>
-        </div>
-
+        <details>
+          <summary>Можно ли сейчас оплатить проживание?</summary>
+          <p>
+            Нет. Учебный сайт не принимает оплату
+            и не подтверждает бронирование.
+          </p>
+        </details>
       </div>
-    </div>
-  </section>
-
-  <section style="background: #fff;">
-    <div class="container">
-      <div class="section-head">
-        <div class="kicker">Что включено</div>
-        <h2>В стоимость входит</h2>
-      </div>
-
-      <div class="grid four">
-        <div class="card">
-          <div class="icon">🛏️</div>
-          <h3>Комфорт</h3>
-          <p>Постельное бельё, полотенце, Wi-Fi.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🍳</div>
-          <h3>Быт</h3>
-          <p>Общая кухня, место для вещей, камера хранения.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🚿</div>
-          <h3>Чистота</h3>
-          <p>Чистые санузлы и душевые.</p>
-        </div>
-
-        <div class="card">
-          <div class="icon">🚗</div>
-          <h3>Для авто</h3>
-          <p>Парковка и удобный выезд утром.</p>
-        </div>
-      </div>
-
-      <p class="note">
-        Итоговая стоимость и доступность уточняются у администратора в Telegram.
-      </p>
     </div>
   </section>
 
   <section class="cta">
     <div class="container">
-      <h2>Не нашли подходящий вариант?</h2>
-      <p>Напишите даты, количество гостей и удобный формат — подскажем, что есть.</p>
-      <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Написать в Telegram</a>
+      <h2>Попробуйте следующий шаг</h2>
+
+      <p>
+        Откройте форму на главной, выберите формат,
+        укажите даты и подготовьте текст тестовой заявки.
+      </p>
+
+      <a class="btn" href="index.html#booking">
+        Открыть форму
+      </a>
     </div>
   </section>
 
@@ -213,30 +631,35 @@
 <footer>
   <div class="container footer-grid">
     <div>
-      <div class="brand" style="color: #fff; margin-bottom: 12px;">
-        <div class="brand-mark">К</div>
+      <a
+        class="brand"
+        href="index.html"
+        style="color: white; margin-bottom: 12px;">
+        <span class="brand-mark" style="color: white;">К</span>
         КУРС.
-      </div>
+      </a>
+
       <p>
-        Спокойный хостел в Иркутске для командировок, работы,
-        транзита и поездок к Байкалу.
+        Учебный проект будущего хостела.
+        Тестируем дизайн, навигацию и форму заявки.
       </p>
     </div>
 
     <div>
-      <h4>Адрес</h4>
+      <h4>Учебный адрес</h4>
       <p>
         Иркутск,<br>
-        Коммунистическая улица, 65<br>
-        Октябрьский район
+        Коммунистическая улица, 65
       </p>
     </div>
 
     <div>
-      <h4>Связь</h4>
-      <p>
-        <a href="https://t.me/Irkutsk_hostel_bot">Telegram: @Irkutsk_hostel_bot</a>
-      </p>
+      <h4>Telegram</h4>
+      <a
+        href="https://t.me/Irkutsk_hostel_bot"
+        style="overflow-wrap: anywhere;">
+        @Irkutsk_hostel_bot
+      </a>
     </div>
 
     <div>
@@ -244,20 +667,100 @@
       <p>
         <a href="index.html">Главная</a><br>
         <a href="directions.html">Как добраться</a><br>
-        <a href="rules.html">Правила и FAQ</a>
+        <a href="rules.html">Правила</a><br>
+        <a href="contacts.html">Контакты</a>
       </p>
     </div>
   </div>
 
   <div class="container copyright">
-    © 2026 Хостел «Курс». Тестовый сайт.
+    © 2026 «Курс». Учебный прототип. Не принимает бронирования.
   </div>
 </footer>
 
 <div class="mobile-bar">
-  <a class="btn ghost" href="https://t.me/Irkutsk_hostel_bot">Telegram</a>
-  <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+  <a class="btn ghost" href="#room-list">К номерам</a>
+  <a class="btn" href="index.html#booking">Тестовая заявка</a>
 </div>
+
+<script>
+  const drawer = document.getElementById('mobile-menu');
+  const openMenuButton = document.getElementById('open-menu');
+  const closeMenuButton = document.getElementById('close-menu');
+  const backdrop = document.getElementById('menu-backdrop');
+
+  function openMenu() {
+    drawer.hidden = false;
+    drawer.classList.add('open');
+    openMenuButton.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeMenuButton.focus();
+  }
+
+  function closeMenu() {
+    drawer.classList.remove('open');
+    drawer.hidden = true;
+    openMenuButton.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    openMenuButton.focus();
+  }
+
+  openMenuButton.addEventListener('click', openMenu);
+  closeMenuButton.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!drawer.classList.contains('open')) return;
+
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+
+    if (event.key === 'Tab') {
+      const items = drawer.querySelectorAll('button, a[href]');
+      const first = items[0];
+      const last = items[items.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === last
+      ) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (
+      window.innerWidth >= 860 &&
+      drawer.classList.contains('open')
+    ) {
+      closeMenu();
+    }
+  });
+
+  document.querySelectorAll('.gallery-arrow').forEach(button => {
+    button.addEventListener('click', () => {
+      const gallery = button.parentElement.querySelector('.gallery');
+      const direction = Number(button.dataset.direction);
+
+      gallery.scrollBy({
+        left: direction * gallery.clientWidth,
+        behavior: window.matchMedia(
+          '(prefers-reduced-motion: reduce)'
+        ).matches ? 'auto' : 'smooth'
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
