@@ -3,45 +3,229 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Как добраться — хостел «Курс» Иркутск</title>
-  <meta name="description" content="Как добраться до хостела «Курс» в Иркутске из аэропорта, с вокзала и на автомобиле. Адрес: Коммунистическая улица, 65.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <title>Как добраться — учебный сайт «Курс»</title>
+  <meta
+    name="description"
+    content="Учебная страница расположения хостела «Курс»: демонстрационный адрес, карта и информация для будущих гостей.">
+
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .test-banner {
+      padding: 9px 20px;
+      background: #e7f1ec;
+      color: #0f3d33;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .menu a[aria-current="page"] {
+      color: var(--green);
+      text-decoration: underline;
+      text-underline-offset: 6px;
+    }
+
+    .breadcrumbs {
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .breadcrumbs a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .drawer-panel {
+      overflow-y: auto;
+    }
+
+    .drawer-panel .btn {
+      color: white;
+      background: var(--green);
+    }
+
+    .drawer-panel .btn:hover {
+      color: white;
+      background: var(--green-dark);
+    }
+
+    .drawer-panel a[aria-current="page"] {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .grid > * {
+      min-width: 0;
+    }
+
+    .map-frame {
+      display: block;
+      width: 100%;
+      height: 390px;
+      border: 0;
+      background: #e7ebe5;
+    }
+
+    .map-actions {
+      padding: 18px;
+      background: white;
+    }
+
+    .map-actions p {
+      margin-bottom: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .address-text {
+      margin: 14px 0 20px;
+      color: var(--ink);
+      font-style: normal;
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .address-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 12px;
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .steps {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .steps li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .step-number {
+      flex: 0 0 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .steps li span:last-child {
+      padding-top: 3px;
+    }
+
+    .mobile-bar {
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
+
+    body {
+      padding-bottom: calc(84px + env(safe-area-inset-bottom));
+    }
+
+    :focus-visible {
+      outline: 3px solid #d9a13b;
+      outline-offset: 4px;
+    }
+
+    @media (min-width: 860px) {
+      .mobile-bar {
+        display: none;
+      }
+
+      body {
+        padding-bottom: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
 </head>
+
 <body>
+
+<div class="test-banner">
+  Учебный сайт. Хостел ещё не открыт.
+  Адрес и условия используются для демонстрации.
+</div>
 
 <header>
   <div class="container nav">
-    <a class="brand" href="index.html">
-      <div class="brand-mark">К</div>
+    <a class="brand" href="index.html" aria-label="Курс — главная">
+      <span class="brand-mark" style="color: white;">К</span>
       КУРС<span>.</span>
     </a>
 
-    <nav class="menu">
+    <nav class="menu" aria-label="Основная навигация">
+      <a href="index.html">Главная</a>
       <a href="rooms.html">Номера</a>
-      <a href="directions.html">Как добраться</a>
+      <a href="directions.html" aria-current="page">
+        Как добраться
+      </a>
       <a href="rules.html">Правила</a>
       <a href="contacts.html">Контакты</a>
     </nav>
 
-    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Меню">
+    <button
+      class="burger"
+      id="open-menu"
+      type="button"
+      aria-label="Открыть меню"
+      aria-controls="mobile-menu"
+      aria-expanded="false">
       <span></span>
     </button>
   </div>
 </header>
 
-<div class="drawer" id="drawer">
-  <div class="drawer-bg" onclick="document.getElementById('drawer').classList.remove('open')"></div>
+<div class="drawer" id="mobile-menu" hidden>
+  <div class="drawer-bg" id="menu-backdrop"></div>
 
-  <div class="drawer-panel">
-    <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+  <div
+    class="drawer-panel"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Навигация по сайту">
+
+    <button
+      class="drawer-close"
+      id="close-menu"
+      type="button"
+      aria-label="Закрыть меню">
+      ×
+    </button>
 
     <a href="index.html">Главная</a>
     <a href="rooms.html">Номера и цены</a>
-    <a href="directions.html">Как добраться</a>
+    <a href="directions.html" aria-current="page">
+      Как добраться
+    </a>
     <a href="rules.html">Правила и FAQ</a>
     <a href="contacts.html">Контакты</a>
 
-    <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+    <a class="btn" href="index.html#booking">
+      Тестовая заявка
+    </a>
   </div>
 </div>
 
@@ -49,46 +233,102 @@
 
   <section class="hero">
     <div class="container">
+
+      <nav class="breadcrumbs" aria-label="Хлебные крошки">
+        <a href="index.html">Главная</a>
+        <span aria-hidden="true"> / </span>
+        <span>Как добраться</span>
+      </nav>
+
       <div class="eyebrow">
         <span class="dot"></span>
-        Иркутск • Октябрьский район
+        Расположение · учебный проект
       </div>
 
-      <h1>Как <em>добраться</em></h1>
+      <h1>Найдите свой <em>Курс</em></h1>
 
       <p class="lead">
-        Хостел «Курс» находится по адресу: Иркутск, Коммунистическая улица, 65.
-        Ниже — карта и основные маршруты.
+        Здесь тестируем карту, отображение адреса
+        и инструкции для будущих гостей.
+        Хостел ещё не открыт — планировать поездку
+        по данным этой страницы пока не нужно.
       </p>
 
       <div class="hero-actions">
-        <a class="btn" href="https://t.me/Irkutsk_hostel_bot">
-          Спросить маршрут в Telegram
+        <a class="btn" href="#location">Посмотреть карту</a>
+        <a class="btn ghost" href="contacts.html">
+          Открыть контакты
         </a>
       </div>
     </div>
   </section>
 
-  <section style="background: #fff;">
+  <section id="location" style="background: white;">
     <div class="container">
       <div class="section-head">
         <div class="kicker">Карта</div>
-        <h2>Коммунистическая улица, 65</h2>
+        <h2>Учебная точка на карте</h2>
+
         <p class="sub">
-          Перед приездом напишите в Telegram — подтвердим заселение
-          и подскажем вход.
+          Для прототипа используем адрес:
+          Иркутск, Коммунистическая улица, 65.
+          Это не подтверждение действующего хостела по этому адресу.
         </p>
       </div>
 
-      <div class="card map-card">
-        <iframe
-          src="https://yandex.ru/map-widget/v1/?text=%D0%98%D1%80%D0%BA%D1%83%D1%82%D1%81%D0%BA%2C%20%D0%9A%D0%BE%D0%BC%D0%BC%D1%83%D0%BD%D0%B8%D1%81%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2065&z=16"
-          width="100%"
-          height="380"
-          style="border: 0; border-radius: 20px;"
-          loading="lazy"
-          title="Карта: Иркутск, Коммунистическая улица, 65">
-        </iframe>
+      <div class="grid two">
+
+        <div class="card map-card">
+          <iframe
+            class="map-frame"
+            src="https://yandex.ru/map-widget/v1/?text=Иркутск%2C%20Коммунистическая%20улица%2C%2065&amp;z=16"
+            loading="lazy"
+            title="Поиск учебного адреса на Яндекс Картах">
+          </iframe>
+
+          <div class="map-actions">
+            <p>
+              Если встроенная карта не загрузилась,
+              откройте поиск адреса по кнопке.
+            </p>
+
+            <a
+              class="btn"
+              href="https://yandex.ru/maps/?text=Иркутск%2C%20Коммунистическая%20улица%2C%2065"
+              target="_blank"
+              rel="noopener noreferrer">
+              Открыть Яндекс Карты
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">📍</div>
+          <h3>Адрес для демонстрации</h3>
+
+          <address class="address-text" id="address">
+            Иркутск,<br>
+            Коммунистическая улица, 65
+          </address>
+
+          <div class="address-actions">
+            <button class="btn" id="copy-address" type="button">
+              Скопировать адрес
+            </button>
+
+            <a class="btn ghost" href="contacts.html">
+              Контакты
+            </a>
+          </div>
+
+          <p class="status" id="copy-status" role="status"></p>
+
+          <p class="note">
+            Точный вход, этаж и ориентиры добавим
+            после подтверждения реального помещения.
+          </p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -96,78 +336,147 @@
   <section>
     <div class="container">
       <div class="section-head">
-        <div class="kicker">Маршруты</div>
-        <h2>Три удобных способа</h2>
+        <div class="kicker">Перед открытием</div>
+        <h2>Подготовим подробные маршруты</h2>
+
+        <p class="sub">
+          Не будем указывать неподтверждённые номера автобусов,
+          время в пути или наличие парковки.
+          Сначала проверим всё на месте.
+        </p>
+      </div>
+
+      <div class="grid three">
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">✈️</div>
+          <h3>Из аэропорта</h3>
+
+          <p>
+            Добавим проверенные варианты проезда,
+            названия остановок и пеший участок до входа.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">🚉</div>
+          <h3>С вокзала</h3>
+
+          <p>
+            Покажем маршрут от нужного выхода вокзала
+            и ориентиры рядом с хостелом.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon" aria-hidden="true">🚗</div>
+          <h3>На автомобиле</h3>
+
+          <p>
+            Уточним подъезд к зданию, возможность остановки,
+            условия парковки и место разгрузки багажа.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="container">
+      <div class="section-head">
+        <div class="kicker">Понятный заезд</div>
+        <h2>Путь до самой двери</h2>
+
+        <p class="sub">
+          Для реального запуска подготовим не только
+          точку на карте, но и наглядную инструкцию.
+        </p>
       </div>
 
       <div class="grid three">
         <div class="card">
-          <div class="icon">✈️</div>
-          <h3>Из аэропорта</h3>
+          <div class="icon" aria-hidden="true">🏠</div>
+          <h3>Фото фасада</h3>
           <p>
-            Можно доехать на автобусе, такси или каршеринге.
-            Время зависит от трафика; напишите в Telegram —
-            подскажем текущий удобный вариант.
+            Покажем, как выглядит здание со стороны улицы
+            и по каким ориентирам его узнать.
           </p>
         </div>
 
         <div class="card">
-          <div class="icon">🚉</div>
-          <h3>С вокзала</h3>
+          <div class="icon" aria-hidden="true">🚪</div>
+          <h3>Фото входа</h3>
           <p>
-            От железнодорожного вокзала удобно добираться на автобусе,
-            такси или пешком, если едете налегке.
+            Обозначим нужную дверь, вывеску
+            и порядок прохода внутрь.
           </p>
         </div>
 
         <div class="card">
-          <div class="icon">🚗</div>
-          <h3>На автомобиле</h3>
+          <div class="icon" aria-hidden="true">🌙</div>
+          <h3>Позднее прибытие</h3>
           <p>
-            Для гостей предусмотрена парковка. Удобный выезд утром
-            в сторону центра, аэропорта или трассы на Байкал.
+            Опубликуем подтверждённый порядок ночного заезда,
+            если такой вариант будет предусмотрен.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <section style="background: #fff;">
+  <section>
     <div class="container">
       <div class="section-head">
-        <div class="kicker">Байкал</div>
-        <h2>Куда поехать дальше</h2>
-        <p class="sub">
-          Иркутск — удобная отправная точка для поездок к Байкалу.
-        </p>
+        <div class="kicker">Проверка прототипа</div>
+        <h2>Что можно попробовать сейчас</h2>
       </div>
 
-      <div class="grid three">
+      <div class="grid two">
         <div class="card">
-          <div class="icon">🏞️</div>
-          <h3>Листвянка</h3>
-          <p>
-            Ближайшее популярное направление на Байкале: посёлок,
-            набережная, рынок и вид на исток Ангары.
-          </p>
+          <h3>Карта и адрес</h3>
+
+          <ol class="steps">
+            <li>
+              <span class="step-number">1</span>
+              <span>Посмотрите, загружается ли карта.</span>
+            </li>
+
+            <li>
+              <span class="step-number">2</span>
+              <span>Нажмите «Скопировать адрес».</span>
+            </li>
+
+            <li>
+              <span class="step-number">3</span>
+              <span>
+                Откройте Яндекс Карты и проверьте поиск адреса.
+              </span>
+            </li>
+          </ol>
         </div>
 
         <div class="card">
-          <div class="icon">🏝️</div>
-          <h3>Ольхон</h3>
-          <p>
-            Самый большой остров Байкала.
-            Обычно поездка занимает целый день или больше.
-          </p>
-        </div>
+          <h3>Навигация по сайту</h3>
 
-        <div class="card">
-          <div class="icon">🏔️</div>
-          <h3>Хужир</h3>
-          <p>
-            Главный посёлок Ольхона, удобная база для прогулок
-            и поездок по острову.
-          </p>
+          <ol class="steps">
+            <li>
+              <span class="step-number">1</span>
+              <span>Откройте меню на телефоне.</span>
+            </li>
+
+            <li>
+              <span class="step-number">2</span>
+              <span>Перейдите в каталог номеров.</span>
+            </li>
+
+            <li>
+              <span class="step-number">3</span>
+              <span>
+                Вернитесь на главную нажатием на логотип «Курс».
+              </span>
+            </li>
+          </ol>
         </div>
       </div>
     </div>
@@ -175,12 +484,25 @@
 
   <section class="cta">
     <div class="container">
-      <h2>Едете впервые?</h2>
+      <h2>Продолжим знакомство с сайтом?</h2>
+
       <p>
-        Напишите, откуда прибываете: аэропорт, вокзал, автовокзал
-        или на машине. Подскажем маршрут и время.
+        Посмотрите демонстрационные комнаты
+        или попробуйте подготовить текст тестовой заявки.
       </p>
-      <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Написать в Telegram</a>
+
+      <div
+        style="display: flex; flex-wrap: wrap;
+               justify-content: center; gap: 12px;">
+
+        <a class="btn" href="rooms.html">
+          Номера и цены
+        </a>
+
+        <a class="btn ghost" href="index.html#booking">
+          Тестовая заявка
+        </a>
+      </div>
     </div>
   </section>
 
@@ -189,30 +511,37 @@
 <footer>
   <div class="container footer-grid">
     <div>
-      <div class="brand" style="color: #fff; margin-bottom: 12px;">
-        <div class="brand-mark">К</div>
+      <a
+        class="brand"
+        href="index.html"
+        style="color: white; margin-bottom: 12px;">
+
+        <span class="brand-mark" style="color: white;">К</span>
         КУРС.
-      </div>
+      </a>
+
       <p>
-        Спокойный хостел в Иркутске для командировок, работы,
-        транзита и поездок к Байкалу.
+        Учебный проект будущего хостела.
+        Тестируем дизайн, навигацию и форму заявки.
       </p>
     </div>
 
     <div>
-      <h4>Адрес</h4>
+      <h4>Учебный адрес</h4>
       <p>
         Иркутск,<br>
-        Коммунистическая улица, 65<br>
-        Октябрьский район
+        Коммунистическая улица, 65
       </p>
     </div>
 
     <div>
-      <h4>Связь</h4>
-      <p>
-        <a href="https://t.me/Irkutsk_hostel_bot">Telegram: @Irkutsk_hostel_bot</a>
-      </p>
+      <h4>Telegram</h4>
+
+      <a
+        href="https://t.me/Irkutsk_hostel_bot"
+        style="overflow-wrap: anywhere;">
+        @Irkutsk_hostel_bot
+      </a>
     </div>
 
     <div>
@@ -220,20 +549,109 @@
       <p>
         <a href="index.html">Главная</a><br>
         <a href="rooms.html">Номера и цены</a><br>
-        <a href="rules.html">Правила и FAQ</a>
+        <a href="rules.html">Правила</a><br>
+        <a href="contacts.html">Контакты</a>
       </p>
     </div>
   </div>
 
   <div class="container copyright">
-    © 2026 Хостел «Курс». Тестовый сайт.
+    © 2026 «Курс». Учебный прототип. Не принимает бронирования.
   </div>
 </footer>
 
 <div class="mobile-bar">
-  <a class="btn ghost" href="https://t.me/Irkutsk_hostel_bot">Telegram</a>
-  <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+  <a class="btn ghost" href="#location">Карта</a>
+  <a class="btn" href="index.html#booking">Тестовая заявка</a>
 </div>
+
+<script>
+  const drawer = document.getElementById('mobile-menu');
+  const openMenuButton = document.getElementById('open-menu');
+  const closeMenuButton = document.getElementById('close-menu');
+  const backdrop = document.getElementById('menu-backdrop');
+
+  function openMenu() {
+    drawer.hidden = false;
+    drawer.classList.add('open');
+    openMenuButton.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeMenuButton.focus();
+  }
+
+  function closeMenu() {
+    drawer.classList.remove('open');
+    drawer.hidden = true;
+    openMenuButton.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    openMenuButton.focus();
+  }
+
+  openMenuButton.addEventListener('click', openMenu);
+  closeMenuButton.addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!drawer.classList.contains('open')) return;
+
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+
+    if (event.key === 'Tab') {
+      const items = drawer.querySelectorAll('button, a[href]');
+      const first = items[0];
+      const last = items[items.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (
+        !event.shiftKey &&
+        document.activeElement === last
+      ) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (
+      window.innerWidth >= 860 &&
+      drawer.classList.contains('open')
+    ) {
+      closeMenu();
+    }
+  });
+
+  const copyAddressButton = document.getElementById('copy-address');
+  const copyStatus = document.getElementById('copy-status');
+  const address = document.getElementById('address');
+
+  copyAddressButton.addEventListener('click', async () => {
+    const text = 'Иркутск, Коммунистическая улица, 65';
+
+    try {
+      await navigator.clipboard.writeText(text);
+      copyStatus.textContent = 'Адрес скопирован.';
+    } catch (error) {
+      const selection = window.getSelection();
+      const range = document.createRange();
+
+      range.selectNodeContents(address);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      copyStatus.textContent =
+        'Адрес выделен. Скопируйте его через меню телефона.';
+    }
+  });
+</script>
 
 </body>
 </html>
