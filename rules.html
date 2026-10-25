@@ -4,38 +4,57 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Правила и FAQ — хостел «Курс» Иркутск</title>
-  <meta name="description" content="Правила проживания, заселения и часто задаваемые вопросы хостела «Курс» в Иркутске.">
+  <meta name="description" content="Правила проживания, заселения, выезда и часто задаваемые вопросы хостела «Курс» в Иркутске.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
   <div class="container nav">
-    <div class="brand">
+    <a class="brand" href="index.html">
       <div class="brand-mark">К</div>
       КУРС<span>.</span>
-    </div>
+    </a>
+
     <nav class="menu">
-      <a href="index.html">Главная</a>
       <a href="rooms.html">Номера</a>
       <a href="directions.html">Как добраться</a>
       <a href="rules.html">Правила</a>
       <a href="contacts.html">Контакты</a>
     </nav>
-    <a class="btn small" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+
+    <button class="burger" onclick="document.getElementById('drawer').classList.add('open')" aria-label="Меню">
+      <span></span>
+    </button>
   </div>
 </header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-bg" onclick="document.getElementById('drawer').classList.remove('open')"></div>
+
+  <div class="drawer-panel">
+    <button class="drawer-close" onclick="document.getElementById('drawer').classList.remove('open')">×</button>
+
+    <a href="index.html">Главная</a>
+    <a href="rooms.html">Номера и цены</a>
+    <a href="directions.html">Как добраться</a>
+    <a href="rules.html">Правила и FAQ</a>
+    <a href="contacts.html">Контакты</a>
+
+    <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+  </div>
+</div>
 
 <main>
 
   <section class="hero">
     <div class="container">
-      <div class="badge">
+      <div class="eyebrow">
         <span class="dot"></span>
         Хостел «Курс»
       </div>
 
-      <h1>Правила и FAQ</h1>
+      <h1>Правила <em>и FAQ</em></h1>
 
       <p class="lead">
         Чтобы отдых был спокойным, мы заранее рассказываем об условиях
@@ -96,8 +115,7 @@
           <h3>Безопасность</h3>
           <p>
             Не оставляйте ценные вещи без присмотра.
-            Для документов и техники используйте личные шкафчики
-            или место для вещей.
+            Для документов и техники используйте место для вещей.
           </p>
         </div>
 
@@ -113,29 +131,49 @@
   <section style="background: #fff;">
     <div class="container">
       <div class="section-head">
+        <div class="kicker">Заселение</div>
+        <h2>Как проходит заезд и выезд</h2>
+      </div>
+
+      <div class="grid three">
+        <div class="card">
+          <div class="icon">🕓</div>
+          <h3>Заселение</h3>
+          <p>
+            С 14:00. Ранний заезд возможен по наличию мест —
+            напишите заранее в Telegram.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🕛</div>
+          <h3>Выезд</h3>
+          <p>
+            До 12:00. Поздний выезд возможен по договорённости,
+            если нет следующего заселения.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🪪</div>
+          <h3>Документы</h3>
+          <p>Для заселения потребуется документ, удостоверяющий личность.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
         <div class="kicker">Вопросы</div>
         <h2>Частые вопросы</h2>
       </div>
 
       <div class="faq">
         <details open>
-          <summary>Во сколько заселение?</summary>
-          <p>Заселение с [время]. Ранний заезд возможен по наличию мест — напишите в Telegram.</p>
-        </details>
-
-        <details>
-          <summary>Во сколько выезд?</summary>
-          <p>Выезд до [время]. Поздний выезд возможен по договорённости, если нет следующего заселения.</p>
-        </details>
-
-        <details>
           <summary>Можно ли приехать ночью?</summary>
           <p>Напишите заранее в Telegram — подскажем порядок заселения.</p>
-        </details>
-
-        <details>
-          <summary>Нужен ли паспорт?</summary>
-          <p>Да, для заселения потребуется документ, удостоверяющий личность.</p>
         </details>
 
         <details>
@@ -156,6 +194,11 @@
         <details>
           <summary>Можно ли оставить вещи после выезда?</summary>
           <p>Да, камера хранения есть. Уточните время и условия в Telegram.</p>
+        </details>
+
+        <details>
+          <summary>Как отменить бронирование?</summary>
+          <p>Напишите в Telegram как можно раньше. Условия отмены уточните у администратора.</p>
         </details>
       </div>
     </div>
@@ -211,9 +254,14 @@
   </div>
 
   <div class="container copyright">
-    © 2026 Хостел «Курс». Название рабочее.
+    © 2026 Хостел «Курс». Тестовый сайт.
   </div>
 </footer>
+
+<div class="mobile-bar">
+  <a class="btn ghost" href="https://t.me/Irkutsk_hostel_bot">Telegram</a>
+  <a class="btn" href="https://t.me/Irkutsk_hostel_bot">Забронировать</a>
+</div>
 
 </body>
 </html>
